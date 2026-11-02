@@ -17,6 +17,7 @@ const __dirname = path.dirname(__filename)
 const require = createRequire(import.meta.url)
 
 const app = express()
+app.use(express.json()) // ← AJOUTER CETTE LIGNE
 
 // Simple root + health endpoints
 app.get('/', (_req, res) => res.json({ ok: true, message: 'Hello from CI/CD demo 👋' }))
@@ -30,7 +31,7 @@ if (fs.existsSync(autoDir)) {
     const full = path.join(autoDir, f)
     const mod = require(full)
     const router = mod.default || mod
-    if (router) app.use('/', router)
+    if (router) app.use('/', router) // le probleme la
   }
 }
 
